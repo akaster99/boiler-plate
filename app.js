@@ -1,20 +1,51 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser'); 
+
 dotenv.config();
 
 
-
 const connect = require('./schemas');
-
+const indexRouter = require('./routes');
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
+const authRouter = require('./routes/auth');
+const logoutRouter = require('./routes/logout');
 
 const app = express();
 const PORT = 3000;
 
 connect();
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cookieParser());
 
-app.get('/',(req,res)=>{
-    res.send('hello world');
-})
+
+app.use('/register',registerRouter);
+app.use('/login',loginRouter);
+app.use('/auth',authRouter); 
+app.use('/logout',logoutRouter);
+app.use('/',indexRouter);
+
+
+app.use((req,res,next)=>{
+    console.log('라우터 없음');
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 404;
+    next(error);
+});
+
+app.use((err,req,res,next)=>{
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err: {};
+    res.status(err.status || 500);
+    res.json({
+        error: err,
+    })
+});
+
 
 app.listen(PORT, ()=>{
     console.log(PORT,'번 포트에서 대기 중');
