@@ -3,7 +3,7 @@ const express =require('express');
 const router = express.Router();
 
 router.get('/',(req,res,next)=>{
-    res.send('안녕하세요');
+    res.send('login API server 동작 중');
 })
 
 module.exports = router;

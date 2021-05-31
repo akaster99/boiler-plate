@@ -31,7 +31,7 @@ router.post('/', async (req,res,next)=>{
                 res.cookie("x_auth",token)
                 .status(200)
                 .json({
-                    loginSucess:true,
+                    loginSuccess:true,
                     userId: user._id,
                 })
             });

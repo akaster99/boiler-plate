@@ -3,7 +3,7 @@ const { auth } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.post('/',auth,(req,res,next)=>{
+router.get('/',auth,(req,res,next)=>{
     res.status(200).json({
         _id: req.user._id,
         name: req.user.name,

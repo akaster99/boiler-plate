@@ -12,9 +12,10 @@ const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const authRouter = require('./routes/auth');
 const logoutRouter = require('./routes/logout');
-
+const apiRouter = require('./routes/api');
+const userRouter = require('./routes/user');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 connect();
 app.use(morgan('dev'));
@@ -22,11 +23,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
 
-
-app.use('/register',registerRouter);
-app.use('/login',loginRouter);
-app.use('/auth',authRouter); 
-app.use('/logout',logoutRouter);
+app.use('/api/hello',apiRouter);
+app.use('/api/register',registerRouter);
+app.use('/api/login',loginRouter);
+app.use('/api/auth',authRouter); 
+app.use('/api/logout',logoutRouter);
+app.use('/api/user',userRouter);
 app.use('/',indexRouter);
 
 
