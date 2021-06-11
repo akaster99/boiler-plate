@@ -3,6 +3,7 @@ import ANavbar from '../ANavBar/ANavBar';
 import Footer from '../../Footbar/Footbar';
 import {withRouter} from 'react-router-dom';
 import { Layout, Breadcrumb, Table, Space, Button} from 'antd';
+import {useHistory} from "react-router";
 
 
 
@@ -11,7 +12,7 @@ const { Content} = Layout;
 
 function AStudentPage(props) {
     const [Users, setUsers] = useState([]);
-
+    const history = useHistory();
     useEffect(() => {
         fetch('/api/user/All')
             .then(response=> response.json())
@@ -52,7 +53,7 @@ function AStudentPage(props) {
       .then(response=> response.json())
       .then(response => {
         console.log(_id)
-        props.history.push({
+        history.push({
           pathname: `/admin/student/edit/${_id}`,
           state:{ userData: response.userData}
         })  

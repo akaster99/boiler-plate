@@ -12,8 +12,8 @@ export default function(SpecificComponent, option, adminRoute = null){
 
     function AuthenticationCheck(props){
         const dispatch = useDispatch();
-        
         dispatch(auth()).then(response=>{
+            console.log(response.payload.isAuth)
         //로그인 안한 상태
             if(!response.payload.isAuth){
                 if(option){
@@ -27,6 +27,9 @@ export default function(SpecificComponent, option, adminRoute = null){
                         //일반 사용자가 어드민에 접근
                         props.history.push('/')
                     }
+                }
+                if(!option){
+                    props.history.push('/')
                 }
             }
         })

@@ -5,11 +5,13 @@ import {withRouter} from 'react-router-dom';
 import { Layout, Breadcrumb,Row,Col,Image,Button, Divider} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import store from '../../../store'
+import {useHistory} from "react-router";
 
 const { Content} = Layout;
 
 
 function ProfilePage(props) {
+    const history = useHistory();
     const user = store.getState().user.userData;
     let role;       
     if (user.role === 0){
@@ -28,7 +30,7 @@ function ProfilePage(props) {
         .then(response=> response.json())
         .then(response => {
             console.log(_id)
-            props.history.push({
+            history.push({
             pathname: `/edit/${_id}`,
             state:{ userData: response.userData}
             })  

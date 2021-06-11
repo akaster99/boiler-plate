@@ -26,7 +26,7 @@ const validateMessages = {
     },
   };
 
-function AStudentEditPage(props) {
+function StudentEditPage(props) {
   const location = useLocation();
   const User = location.state.userData;
     // const user_id = props.match.params._id;
@@ -139,4 +139,4 @@ function AStudentEditPage(props) {
     )
 }
 
-export default withRouter(AStudentEditPage)
+export default withRouter(StudentEditPage)

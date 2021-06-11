@@ -21,15 +21,16 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" component = {Auth(LandingPage,true,false)} />
-          <Route exact path="/" component={Auth(LoginPage,false,false)} />
+          
           <Route exact path="/admin" component={Auth(ALandingPage,true,true)} />
           <Route exact path="/admin/student" component={Auth(AStudentPage,true,true)} />
           <Route exact path="/admin/student/edit/:_id" component={Auth(AStudentEditPage,true,true)}/>
           <Route exact path="/profile" component={Auth(ProfilePage,true,false)} />
-          <Route exact patrh="/profile/edit" component={Auth(ProfileEditPage,true)} />
-          <Route exact path="/login" component = {Auth(LoginPage,false) } />
+          <Route exact path="/profile/edit" component={Auth(ProfileEditPage,true,false)} />
+          <Route exact path="/login" component = {Auth(LoginPage,false,false) } />
           <Route exact path ="/register" component = {Auth(RegisterPage,false)} />
+          <Route exact path="/" component = {Auth(LandingPage,true,false)} />
+          <Route exact path="/" component={Auth(LoginPage,false,false)} />
         </Switch>
       </div>
     </Router>
