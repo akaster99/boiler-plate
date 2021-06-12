@@ -6,6 +6,8 @@ import { Layout, Breadcrumb,Row,Col,Image,Button, Divider} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import store from '../../../store'
 import {useHistory} from "react-router";
+import * as config from '../../../Config';
+
 
 const { Content} = Layout;
 
@@ -26,7 +28,7 @@ function ProfilePage(props) {
 
     const editHandler = ()=>{
         const _id = user._id
-        fetch(`/api/user/id/${_id}`)
+        fetch(`${config.BACK_URL}/api/user/id/${_id}`, { withCredentials: true })
         .then(response=> response.json())
         .then(response => {
             console.log(_id)

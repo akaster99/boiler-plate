@@ -4,6 +4,7 @@ import Footer from '../../Footbar/Footbar';
 import {withRouter} from 'react-router-dom';
 import { Layout, Breadcrumb, Table, Space, Button} from 'antd';
 import {useHistory} from "react-router";
+import * as config from '../../../../Config';
 
 
 
@@ -49,7 +50,7 @@ function AStudentPage(props) {
       },
     ];
     const editHandler = (_id)=>{
-      fetch(`/api/user/id/${_id}`)
+      fetch(`${config.BACK_URL}/api/user/id/${_id}`, { withCredentials: true })
       .then(response=> response.json())
       .then(response => {
         console.log(_id)

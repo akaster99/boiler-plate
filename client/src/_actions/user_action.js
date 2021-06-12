@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as config from '../Config';
 import {
     LOGIN_USER,
     REGISTER_USER,
@@ -7,7 +8,7 @@ import {
 
 export async function loginUser(dataToSubmit){
     try{
-        const request = await axios.post('/api/login', dataToSubmit);
+        const request = await axios.post(`${config.BACK_URL}/api/login`, dataToSubmit, { withCredentials: true });
 
         return {
             type: LOGIN_USER,
@@ -20,7 +21,7 @@ export async function loginUser(dataToSubmit){
 
 export async function registerUser(dataToSubmit){
     try{
-        const request = await axios.post('/api/register', dataToSubmit);
+        const request = await axios.post(`${config.BACK_URL}/api/register`, dataToSubmit, { withCredentials: true });
 
         return {
             type: REGISTER_USER,
@@ -33,7 +34,7 @@ export async function registerUser(dataToSubmit){
 
 export async function auth(){
     try{
-        const request = await axios.get('/api/auth');
+        const request = await axios.get(`${config.BACK_URL}/api/auth`, { withCredentials: true });
         return {
             type: AUTH_USER,
             payload: request.data

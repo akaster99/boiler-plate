@@ -4,20 +4,21 @@ const jwt = require('jsonwebtoken');
 
 const auth = async (req,res,next)=>{
     try{
-        const token = req.cookies.x_auth;
-        if(token == undefined){
-            res.json({isAuth: false, error:true});
-            console.log(false)
+        let token = req.cookies.x_auth;
+        console.log(token)
+        if(token !== undefined){
+            decoded = jwt.verify(token, process.env.JWT_SECRET);
+            user =  await User.findOne({"_id":decoded.id,"token":token })
+        }else{
+            user = false
         }
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-   
-        user =  await User.findOne({"_id":decoded.id,"token":token })
         if(!user){
             res.json({isAuth: false, error:true});
+        }else{
+            req.token = token;
+            req.user = user;
+            next()
         }
-        req.token = token;
-        req.user = user;
-        next();
     }catch(err){
         console.error(err);
         next(err);

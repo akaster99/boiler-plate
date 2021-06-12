@@ -2,7 +2,6 @@ import {
     LOGIN_USER,
     REGISTER_USER,
     AUTH_USER,
-    ALL_USER
 } from '../_actions/types';
 
 

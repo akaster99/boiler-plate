@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import {profilePage, homePage,studentManagePage} from '../../../../_actions/page_action';
 import { useDispatch } from 'react-redux';
+import * as config from '../../../../Config';
 
 
 const { Header} = Layout;
@@ -16,7 +17,7 @@ function NavBar(props) {
     const dispatch = useDispatch();
     const logoutHandler = async () =>{
         try{
-            const ares = await axios.get('/api/logout');
+            const ares = await axios.get(`${config.BACK_URL}/api/logout`, { withCredentials: true });
             if(ares.data.success){
                 props.history.push('/login');
                 console.log(ares.data.success);

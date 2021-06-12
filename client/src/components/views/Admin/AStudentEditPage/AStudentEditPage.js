@@ -3,6 +3,7 @@ import ANavbar from '../ANavBar/ANavBar';
 import Footer from '../../Footbar/Footbar';
 import {useLocation, withRouter} from 'react-router-dom';
 import { Layout, Breadcrumb, Button, Form, Input, InputNumber} from 'antd';
+import * as config from '../../../../Config';
 
 const layout = {
     labelCol: {
@@ -44,8 +45,9 @@ function AStudentEditPage(props) {
     if(e.user.password){
       User.password = e.user.password;
     }
-    fetch('/api/user/update',{
+    fetch(`${config.BACK_URL}/api/user/update`,{
       method: 'POST',
+      withCredentials: true,
       headers: {
         'Content-type': 'application/json'
       },
